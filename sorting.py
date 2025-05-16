@@ -94,7 +94,6 @@ def insertsort ( list ):
 #Uses recursion by appending, concating together items
 #1 list, 1 helper functions. Breaks down the list into singleton lists and then merged comparing left and right values.
 unsorted3 = x
-unsorted3.append(1)
 
 def mergeSort(unsorted):
    if len(unsorted) <= 1: return unsorted
@@ -118,4 +117,40 @@ def merge(left, right):
    result.extend(right[j:])
    return result
    
-print("Merge Sort: \n\n", len(mergeSort(unsorted3)), mergeSort(unsorted3), "\n\n")
+print("Merge Sort: \n\n", mergeSort(unsorted3), "\n\n")
+
+#Quick Sort, is O (n log n) on average cases and O(n*n) worst case along with in place sorting algorithm
+#Randomized quicksort can most of the time rid of worst case
+#Most quicksort are implemented as sort in languages
+#1 array, select a pivot and rearrage all elem less of pivot is left and greater to the right, keep track of start and end indexes
+#keep getting new pivots and move elements left and right
+unsorted4 = x
+
+def quickSortManager(unsorted):
+   start = 0
+   end = len(unsorted) - 1
+
+   return quickSort(unsorted, start, end)
+
+def quickSort(unsorted, start, end):
+   if start < end: 
+      partitionIndex = partition(unsorted, start, end)
+      quickSort(unsorted, start, partitionIndex-1)
+      quickSort(unsorted, partitionIndex+1, end)
+
+   return unsorted
+
+def partition(unsorted, start, end):
+   pivot = unsorted[end]
+   partitionIndex = start
+   for i in range(start, end):
+      if unsorted[i] <= pivot:
+         unsorted[i], unsorted[partitionIndex] = unsorted[partitionIndex], unsorted[i]
+         partitionIndex += 1
+   unsorted[partitionIndex], unsorted[end] = unsorted[end], unsorted[partitionIndex]
+   
+   return partitionIndex
+
+print("Quick Sort: \n\n", quickSortManager(unsorted4))
+
+   
