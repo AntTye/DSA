@@ -28,7 +28,7 @@ def selectionSort0( unsortedArr, sortedArr ):
       
       sortedArr.append(unsortedArr[i])
    return sortedArr
-print("Selection Sort1: \n\n", selectionSort0(unsorted0, []), "\n\n")
+#print("Selection Sort 1: \n\n", selectionSort0(unsorted0, []), "\n\n")
 
 def selectionSort1( unsortedArr ):
    for i in range( len(unsortedArr) ):
@@ -40,7 +40,7 @@ def selectionSort1( unsortedArr ):
       if i != mindex:
          unsortedArr[i], unsortedArr[mindex] = unsortedArr[mindex], unsortedArr[i]
    return unsortedArr
-print("Selection Sort2: \n\n", selectionSort1(unsorted0), "\n\n")
+#print("Selection Sort 2: \n\n", selectionSort1(unsorted0), "\n\n")
 
 
 #Bubble Sort, probably least code written for easy sorting O(n*n) or O(n) best case using flag
@@ -57,7 +57,7 @@ def bubbleSort(unsorted):
             flag = 1
       #if flag == 0: break
    return unsorted
-print("Bubble Sort: \n\n", bubbleSort(unsorted1), "\n\n")
+#print("Bubble Sort: \n\n", bubbleSort(unsorted1), "\n\n")
 
 #Insertion Sort, a bit more efficient than previous 2. O(n + b) == O(n) best case, O(n*n) worst
 #1 unsorted list, 1 sorted list
@@ -76,7 +76,7 @@ def insertionSort(unsorted):
       unsorted[vacancy] = val
 
    return unsorted
-print("Insertion Sort: \n\n", insertionSort(unsorted2), "\n\n")
+#print("Insertion Sort: \n\n", insertionSort(unsorted2), "\n\n")
 
 """
 def insertsort ( list ):
@@ -117,13 +117,13 @@ def merge(left, right):
    result.extend(right[j:])
    return result
    
-print("Merge Sort: \n\n", mergeSort(unsorted3), "\n\n")
+#print("Merge Sort: \n\n", mergeSort(unsorted3), "\n\n")
 
 #Quick Sort, is O (n log n) on average cases and O(n*n) worst case along with in place sorting algorithm
 #Randomized quicksort can most of the time rid of worst case
 #Most quicksort are implemented as sort in languages
 #1 array, select a pivot and rearrage all elem less of pivot is left and greater to the right, keep track of start and end indexes
-#keep getting new pivots and move elements left and right
+#keep getting new pivots and move elements left and right, partition will always be the end most value of the list
 unsorted4 = x
 
 def quickSortManager(unsorted):
@@ -133,6 +133,7 @@ def quickSortManager(unsorted):
    return quickSort(unsorted, start, end)
 
 def quickSort(unsorted, start, end):
+   print(unsorted)
    if start < end: 
       partitionIndex = partition(unsorted, start, end)
       quickSort(unsorted, start, partitionIndex-1)
@@ -151,6 +152,28 @@ def partition(unsorted, start, end):
    
    return partitionIndex
 
-print("Quick Sort: \n\n", quickSortManager(unsorted4))
+print("Quick Sort: \n\n", quickSortManager(unsorted4[0:25]), "\n\n")
 
-   
+unsorted5 = x
+
+def qs (ul, start, end):
+   print(ul)
+   if start < end:
+      partitionI = pifind(ul, start, end)
+      qs(ul, start, partitionI-1)
+      qs(ul, partitionI+1, end)
+   return ul
+                                # v i                 v partitionI, part
+def pifind(ul, start, end):     #[9,10,7,8,5,3,4,6,2,[1]]
+   part = ul[end]               #[*9,*10,*7,*8,*5,*3,*4,*6,*2,[1]]
+   partitionI = start           #[[1],10,7,8,5,3,4,6,2,9] 
+
+   for i in range(start, end):  
+      if ul[i] < part:
+         ul[i], ul[partitionI] = ul[partitionI], ul[i]
+         partitionI += 1
+   ul[end], ul[partitionI] = ul[partitionI], ul[end]
+   return partitionI
+
+
+#print("Quick Sort 2: \n\n", qs([9,10,7,8,5,3,4,6,2,1], 0, 9))
